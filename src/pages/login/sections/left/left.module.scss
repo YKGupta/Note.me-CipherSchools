@@ -1,0 +1,30 @@
+.left{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: 0px auto;
+    align-items: center;
+    justify-content: center;
+
+    img{
+        width: 300px;
+        margin-bottom: 20px;
+    }
+
+    div{
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        
+        h1{
+            line-height: 45px;
+            font-size: var(--fs-xxl);
+            font-weight: var(--fw-bold);
+        }
+        
+        p{
+            font-size: var(--fs-medium);
+            color: var(--gray);
+        }
+    }
+}

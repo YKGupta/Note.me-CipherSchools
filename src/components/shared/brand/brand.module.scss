@@ -1,0 +1,21 @@
+.brand{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+
+    img{
+        width: 45px;
+        margin-right: 5px;
+    }
+
+    h1{
+        font-size: var(--fs-xxxl);
+        color: var(--black);
+
+        span{
+            font-style: italic;
+            font-weight: var(--fw-light);
+        }
+    }
+}
