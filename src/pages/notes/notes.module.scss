@@ -1,0 +1,13 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    padding-top: 70px;
+
+    .main{
+        display: grid;
+        gap: 30px;
+        grid-template-columns: repeat(4, 1fr);
+    }
+}

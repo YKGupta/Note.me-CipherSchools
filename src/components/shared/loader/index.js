@@ -1,0 +1,15 @@
+import React from 'react';
+import styles from './loader.module.scss';
+import BrandLogo from '../brand';
+import ProgressBar from '../../atoms/progress bar';
+
+const Loader = () => {
+    return (
+        <article className={styles.container}>
+            <BrandLogo />
+            <ProgressBar percentage="50%" />
+        </article>
+    )
+}
+
+export default Loader;

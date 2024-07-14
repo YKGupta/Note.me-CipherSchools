@@ -1,0 +1,33 @@
+.header{
+    display: grid;
+    width: 100%;
+    padding: 0 6rem;
+    padding-top: 20px;
+    grid-template-columns: auto 60px;
+    gap: 20px;
+
+    @media screen and (min-width: 1400px) {
+        padding: 8px 12rem;    
+    }
+
+    .searchBar{
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        font-size: var(--fs-large);
+        width: 100%;
+
+        .field{
+            width: 100%;
+            border: none;
+            padding: 8px 15px;
+            outline: none;
+        }
+
+        svg{
+            width: 24px;
+            height: 24px;
+            color: var(--gray)
+        }
+    }
+}

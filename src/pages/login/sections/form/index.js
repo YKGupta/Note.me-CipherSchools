@@ -3,11 +3,13 @@ import styles from './form.module.scss';
 import Button from '../../../../components/atoms/button';
 import Input from '../../../../components/atoms/input';
 import BrandLogo from '../../../../components/shared/brand';
+import { useNavigate } from 'react-router-dom';
 
 const Form = () => {
 
     const [ email, setEmail ] = useState("");
     const [ password, setPassword ] = useState("");
+    const navigate = useNavigate();
 
     return (
         <section className={styles['form-container']}>
@@ -33,6 +35,7 @@ const Form = () => {
                     className="emailBtn"
                     isDisabled={false}
                     color="#30C58D"
+                    handleClick={() => navigate('/notes')}
                 />
             </div>
         </section>
