@@ -12,7 +12,7 @@ const Main = () => {
                 <Sidebar />
                 <main className={styles.main}>
                     <Navbar />
-                    <section classNane={styles.content}>
+                    <section className={styles.content}>
                         <Outlet />
                     </section>
                 </main>
