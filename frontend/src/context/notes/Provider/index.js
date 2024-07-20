@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import NotesContext from '../Context';
 import { toast } from 'react-toastify';
-import { API_HOST } from '../../../config/types';
 import { getFromLocalStorage } from '../../../utils/localstorage';
 
 const NotesProvider = (props) => {
@@ -11,7 +10,7 @@ const NotesProvider = (props) => {
     const getAllNotes = async () => {
         try
         {
-            const response = await fetch(`${API_HOST}/note/read`, {
+            const response = await fetch(`${process.env.REACT_APP_API_HOST}/note/read`, {
 				method: "GET",
 				headers: {
 					"Auth-Token": getFromLocalStorage("token")
@@ -38,7 +37,7 @@ const NotesProvider = (props) => {
     const addNote = async (text, color) => {
         try
         {
-            const response = await fetch(`${API_HOST}/note/create`, {
+            const response = await fetch(`${process.env.REACT_APP_API_HOST}/note/create`, {
                 method: "POST",
                 headers: {
                     "Auth-Token": getFromLocalStorage("token"),
@@ -70,7 +69,7 @@ const NotesProvider = (props) => {
     const updateNote = async (id, text) => {
         try
         {
-            const response = await fetch(`${API_HOST}/note/update/${id}`, {
+            const response = await fetch(`${process.env.REACT_APP_API_HOST}/note/update/${id}`, {
                 method: "PUT",
                 headers: {
                     "Auth-Token": getFromLocalStorage("token"),
@@ -108,7 +107,7 @@ const NotesProvider = (props) => {
     const deleteNote = async (id, text) => {
         try
         {
-            const response = await fetch(`${API_HOST}/note/delete/${id}`, {
+            const response = await fetch(`${process.env.REACT_APP_API_HOST}/note/delete/${id}`, {
                 method: "DELETE",
                 headers: {
                     "Auth-Token": getFromLocalStorage("token"),

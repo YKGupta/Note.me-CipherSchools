@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import UserContext from '../Context';
-import { API_HOST } from '../../../config/types';
 import { addToLocalStorage, getFromLocalStorage } from '../../../utils/localstorage';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -26,7 +25,7 @@ const UserProvider = (props) => {
             setPercentage(40);
             await wait(50);
 
-            const response = await fetch(`${API_HOST}/login`, {
+            const response = await fetch(`${process.env.REACT_APP_API_HOST}/login`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json"
@@ -44,6 +43,10 @@ const UserProvider = (props) => {
             
             setPercentage(100);
             await wait(50);
+            
+            setName("");
+            setEmail("");
+            setPassword("");
 
             if(json.success)
             {
@@ -73,7 +76,7 @@ const UserProvider = (props) => {
             setPercentage(40);
             await wait(50);
 
-            const response = await fetch(`${API_HOST}/signup`, {
+            const response = await fetch(`${process.env.REACT_APP_API_HOST}/signup`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json"
@@ -92,6 +95,10 @@ const UserProvider = (props) => {
 
             setPercentage(100);
             await wait(50);
+            
+            setName("");
+            setEmail("");
+            setPassword("");
 
             if(json.success)
             {
@@ -114,7 +121,7 @@ const UserProvider = (props) => {
     const getUserDetails = async () => {
         try
         {
-            const response = await fetch(`${API_HOST}/details`, {
+            const response = await fetch(`${process.env.REACT_APP_API_HOST}/details`, {
                 method: "GET",
                 headers: {
                     "Auth-Token": getFromLocalStorage("token")
