@@ -8,9 +8,14 @@
     border: none;
     border-radius: var(--br-md);
     cursor: pointer;
+    transition: 0.25s;
+
+    svg{
+        font-size: var(--fs-xxl);
+    }
 
     h3{
-        margin-left: 5px;
+        margin-left: 10px;
         font-size: var(--fs-medium);
         font-weight: var(--fw-light);
     }

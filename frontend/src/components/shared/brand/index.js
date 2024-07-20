@@ -5,10 +5,10 @@ import BrandDarkImg from '../../../assets/brand logo dark.svg';
 
 const BrandLogo = (props) => {
 
-    const { logoOnly, type = "light", className } = props;
+    const { logoOnly, type = "light", className, onClick = () => {} } = props;
 
     return (
-        <article className={`${styles.brand}`}>
+        <article className={`${styles.brand}`} onClick={onClick}>
             <img src={type === "light" ? BrandLightImg : BrandDarkImg } className={`${className}`} alt="brand-logo" />
             {
                 !logoOnly && (

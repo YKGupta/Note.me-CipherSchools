@@ -9,5 +9,6 @@
     span{
         border-radius: 1000px;
         background-color: var(--black);
+        transition: width 0.05s;
     }
 }

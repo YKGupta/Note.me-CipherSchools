@@ -1,28 +1,42 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './notes.module.scss';
 import Wrapper from '../../components/hoc/wrapper';
 import Greeting from '../../components/atoms/greeting';
 import Note from '../../components/cards/note';
 import { getFromLocalStorage } from '../../utils/localstorage';
-import { NOTES_DATA } from '../../config/types';
+import Popup from '../../components/cards/popup';
+import NotesContext from '../../context/notes/Context';
+import SearchContext from '../../context/search/context';
 
 const Notes = () => {
 
-    const [notes, setNotes] = useState([]);
-    const data = getFromLocalStorage(NOTES_DATA);
+    const { notes, getAllNotes } = useContext(NotesContext);
+    const {searchText} = useContext(SearchContext);
+    const [selectedNote, setSelectedNote] = useState({});
+    const navigate = useNavigate();
 
     useEffect(() => {
-        if(!data)
+
+        if(!getFromLocalStorage("token")){
+            navigate('/');
             return;
-        setNotes(data);
-    }, [data]);
+        }
+
+        getAllNotes();
+        // eslint-disable-next-line
+    }, []);
 
     return (
         <section className={styles.container}>
+            {
+                selectedNote.color &&
+                <Popup {...selectedNote} onClose={() => setSelectedNote({})} />
+            }
             <Greeting />
             <main className={styles.main}>
                 {
-                    notes.map((item, index) => <Note key={item.id} text={item.text} date={item.createdAt} color={item.color} />)
+                    notes.filter((note) => note.text.includes(searchText)).map((item, index) => <Note key={item._id} onSelect={() => setSelectedNote({ text: item.text, date: item.createdAt, color: item.color, id: item._id })} text={item.text} date={item.createdAt} color={item.color} />)
                 }
             </main>
         </section>

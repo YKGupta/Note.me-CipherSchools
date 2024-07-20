@@ -1,41 +1,45 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styles from './form.module.scss';
 import Button from '../../../../components/atoms/button';
 import Input from '../../../../components/atoms/input';
 import BrandLogo from '../../../../components/shared/brand';
-import { useNavigate } from 'react-router-dom';
+import UserContext from '../../../../context/user/Context';
 
 const Form = () => {
 
-    const [ email, setEmail ] = useState("");
-    const [ password, setPassword ] = useState("");
-    const navigate = useNavigate();
+    const [registering, setRegistering] = useState(false);
+    const { setName, setEmail, setPassword, login, signup, name, email, password } = useContext(UserContext);
 
     return (
         <section className={styles['form-container']}>
             <div className={styles.form}>
                 <BrandLogo />
                 <Button 
-                    text="Join With Google"
-                    icon="bi:google"
-                    className="google"
+                    text={!registering ? "Sign Up" : "Log in"}
+                    icon={!registering ? "mdi:register-outline" : "material-symbols:login"}
+                    className="signup"
                     isDisabled={false}
                     color="#F7685C"
+                    handleClick={() => setRegistering(!registering)}
                 />
                 <div className={styles.option}>
-                    <span>or join with email address</span>
+                    <span>or login with email address</span>
                 </div>
                 <article className={styles.details}>
+                    {
+                        registering &&
+                        <Input type="text" placeHolder="Enter your name" onChange={(e) => setName(e.target.value)} />
+                    }
                     <Input type="email" placeHolder="Enter your email id" onChange={(e) => setEmail(e.target.value)} />
                     <Input type="password" placeHolder="Enter your password" onChange={(e) => setPassword(e.target.value)} />
                 </article>
                 <Button 
                     text="Continue"
-                    icon="material-symbols:login"
+                    icon={registering ? "mdi:register-outline" : "material-symbols:login"}
                     className="emailBtn"
-                    isDisabled={false}
+                    isDisabled={registering ? (name.trim() === "" || email.trim() === "" || password.trim() === "") : (email.trim() === "" || password.trim() === "")}
                     color="#30C58D"
-                    handleClick={() => navigate('/notes')}
+                    handleClick={registering ? signup : login}
                 />
             </div>
         </section>

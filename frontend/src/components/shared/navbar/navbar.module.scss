@@ -1,6 +1,7 @@
 .header{
     display: grid;
-    width: 100%;
+    width: calc(100% - 80px);
+    margin-left: 80px;
     padding: 0 6rem;
     padding-top: 20px;
     grid-template-columns: auto 60px;
@@ -22,6 +23,11 @@
             border: none;
             padding: 8px 15px;
             outline: none;
+
+            &:active, input:hover{
+                outline: none;
+                border: none;
+            }
         }
 
         svg{

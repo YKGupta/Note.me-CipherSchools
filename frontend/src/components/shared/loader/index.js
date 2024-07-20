@@ -3,11 +3,14 @@ import styles from './loader.module.scss';
 import BrandLogo from '../brand';
 import ProgressBar from '../../atoms/progress bar';
 
-const Loader = () => {
+const Loader = (props) => {
+
+    const {percentage} = props;
+
     return (
         <article className={styles.container}>
             <BrandLogo />
-            <ProgressBar percentage="50%" />
+            <ProgressBar percentage={percentage} />
         </article>
     )
 }

@@ -2,8 +2,9 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    width: 100%;
+    width: calc(100% - 80px);
     padding-top: 70px;
+    margin-left: 80px;
 
     .main{
         display: grid;

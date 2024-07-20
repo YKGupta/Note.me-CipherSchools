@@ -1,30 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './note.module.scss';
 import formatDate from '../../../utils/formatDate';
+import { Icon } from '@iconify/react';
 
 const Note = (props) => {
 
-    const [expand, setExpand] = useState(false);
-    const [noteText, setNoteText] = useState("");
-    const {text, date, color} = props;
+    const {text, date, color, onSelect} = props;
 
     return (
         <article className={styles.container} style={{backgroundColor: color}}>
             <div className={styles.content}>
+                <p>{text}</p>
                 {
-                    !text.length ?
-                    <textarea value={noteText} onChange={(e) => setNoteText(e.target.value)} className={styles.textarea} />
-                    :
-                    <>
-                        <p className={`${expand ? styles.expanded : ""}`}>{text}</p>
-                        {
-                            text.length > 100 &&
-                            <button onClick={() => setExpand(!expand)}>read {expand ? "less" : "more"}</button>
-                        }
-                    </>
+                    text.length > 100 &&
+                    <button onClick={onSelect}>read more</button>
                 }
             </div>
-            <footer className={styles.footer}>{formatDate(date)}</footer>
+            <footer className={styles.footer}>
+                <p>{formatDate(date)}</p>
+                <article onClick={onSelect}>
+                    <Icon icon="tabler:edit" />
+                </article>
+            </footer>
         </article>
     )
 }
