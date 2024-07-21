@@ -133,15 +133,18 @@ const UserProvider = (props) => {
             if(json.success)
             {
                 setUser(json.user);
+                return true;
             }
             else
             {
                 toast.error(json.message);
+                return false;
             }
         }
         catch(error)
         {
             toast.error(error);
+            return false;
         }
     };
 
