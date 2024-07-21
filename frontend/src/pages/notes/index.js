@@ -36,7 +36,7 @@ const Notes = () => {
             <Greeting />
             <main className={styles.main}>
                 {
-                    notes.filter((note) => note.text.includes(searchText)).map((item, index) => <Note key={item._id} onSelect={() => setSelectedNote({ text: item.text, date: item.createdAt, color: item.color, id: item._id })} text={item.text} date={item.createdAt} color={item.color} />)
+                    notes.filter((note) => note.text.toLowerCase().includes(searchText.toLowerCase())).map((item, index) => <Note key={item._id} onSelect={() => setSelectedNote({ text: item.text, date: item.createdAt, color: item.color, id: item._id })} text={item.text} date={item.createdAt} color={item.color} />)
                 }
             </main>
         </section>

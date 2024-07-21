@@ -25,7 +25,7 @@ function App() {
 							<Route path="/" element={<Login />} />
 							<Route path="/notes" element={<Main />}>
 								<Route index element={<Notes />} />
-							</Route>				
+							</Route>
 						</Routes>
 					</NotesProvider>
 				</SearchProvider>

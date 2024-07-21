@@ -29,11 +29,10 @@
                 border: none;
             }
         }
+    }
 
-        svg{
-            width: 24px;
-            height: 24px;
-            color: var(--gray)
-        }
+    svg{
+        font-size: var(--fs-xxl);
+        color: var(--gray)
     }
 }
