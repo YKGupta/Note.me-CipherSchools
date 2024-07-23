@@ -22,7 +22,7 @@ const UserProvider = (props) => {
                 return;
 
             setLoading(true);
-            setPercentage(40);
+            setPercentage(10);
             await wait(50);
 
             const response = await fetch(`${process.env.REACT_APP_API_HOST}/login`, {
@@ -36,17 +36,20 @@ const UserProvider = (props) => {
                 })
 			});
 
-            setPercentage(80);
+            setPercentage(60);
             await wait(50);
             
             const json = await response.json();
             
-            setPercentage(100);
+            setPercentage(90);
             await wait(50);
             
             setName("");
             setEmail("");
             setPassword("");
+            
+            setPercentage(100);
+            await wait(50);
 
             if(json.success)
             {
@@ -73,7 +76,7 @@ const UserProvider = (props) => {
                 return;
 
             setLoading(true);
-            setPercentage(40);
+            setPercentage(10);
             await wait(50);
 
             const response = await fetch(`${process.env.REACT_APP_API_HOST}/signup`, {
@@ -88,17 +91,20 @@ const UserProvider = (props) => {
                 })
 			});
 
-            setPercentage(80);
+            setPercentage(60);
             await wait(50);
 
             const json = await response.json();
 
-            setPercentage(100);
+            setPercentage(90);
             await wait(50);
             
             setName("");
             setEmail("");
             setPassword("");
+
+            setPercentage(100);
+            await wait(50);
 
             if(json.success)
             {

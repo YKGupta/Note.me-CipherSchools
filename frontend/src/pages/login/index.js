@@ -6,11 +6,13 @@ import Loader from '../../components/shared/loader';
 import LoaderContext from '../../context/loader/context';
 import UserContext from '../../context/user/Context';
 import { useNavigate } from 'react-router-dom';
+import ThemeContext from '../../context/theme/context';
 
 const Login = () => {
 
     const { loading, percentage } = useContext(LoaderContext);
     const {getUserDetails} = useContext(UserContext);
+    const {theme} = useContext(ThemeContext);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -31,7 +33,7 @@ const Login = () => {
                 loading ?
                 <Loader percentage={percentage} />
             :
-                <main className={styles.container}>
+                <main className={styles.container} style={{backgroundColor: theme === "light" ? "var(--white)" : "var(--black)"}}>
                     <Left />
                     <Form />
                 </main>

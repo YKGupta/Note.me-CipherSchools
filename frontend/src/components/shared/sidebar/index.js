@@ -16,7 +16,7 @@ const Sidebar = () => {
     const handleClick = (src) => {
         if(src.title === "Add Notes")
         {
-            addNote("", generateRandomColor(0.4));
+            addNote("Type your note...", generateRandomColor(0.4));
         }
     };
 
@@ -27,7 +27,7 @@ const Sidebar = () => {
 
     return (
         <aside className={styles.sidebar}>
-            <BrandLogo logoOnly={true} type="dark" className={styles.logo} onClick={() => navigate('/notes')} />
+            <BrandLogo logoOnly={true} onlyDark={true} className={styles.logo} onClick={() => navigate('/notes')} />
             <section>
                 {
                     sideData.map((item, index) => 

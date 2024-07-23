@@ -5,7 +5,6 @@
     grid-template-rows: auto 35px;
     border-radius: 10px;
     aspect-ratio: 6 / 5;
-    background-color: rgba(251, 235, 149, 0.4);
 
     .content{
         p{
@@ -17,12 +16,10 @@
             font-size: var(--fs-medium);
             font-weight: var(--fw-normal);
             line-height: 25px;
-            color: #3C3D43;
         }
         
         button{
             background-color: transparent;
-            color: var(--gray);
             cursor: pointer;
             text-transform: capitalize;
             border: none;
@@ -31,7 +28,6 @@
 
     .footer{
         font-size: var(--fs-small);
-        color: var(--gray);
 
         display: grid;
         align-items: center;

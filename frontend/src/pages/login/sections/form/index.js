@@ -4,11 +4,13 @@ import Button from '../../../../components/atoms/button';
 import Input from '../../../../components/atoms/input';
 import BrandLogo from '../../../../components/shared/brand';
 import UserContext from '../../../../context/user/Context';
+import ThemeContext from '../../../../context/theme/context';
 
 const Form = () => {
 
     const [registering, setRegistering] = useState(false);
     const { setName, setEmail, setPassword, login, signup, name, email, password } = useContext(UserContext);
+    const { theme } = useContext(ThemeContext);
 
     return (
         <section className={styles['form-container']}>
@@ -23,7 +25,7 @@ const Form = () => {
                     handleClick={() => setRegistering(!registering)}
                 />
                 <div className={styles.option}>
-                    <span>or login with email address</span>
+                    <span style={{backgroundColor: theme === "light" ? "var(--white)" : "var(--black)", color: theme === "light" ? "var(--gray)" : "var(--gray)"}}>or login with email address</span>
                 </div>
                 <article className={styles.details}>
                     {

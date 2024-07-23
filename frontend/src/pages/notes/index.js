@@ -8,12 +8,14 @@ import { getFromLocalStorage } from '../../utils/localstorage';
 import Popup from '../../components/cards/popup';
 import NotesContext from '../../context/notes/Context';
 import SearchContext from '../../context/search/context';
+import ThemeContext from '../../context/theme/context';
 
 const Notes = () => {
 
     const { notes, getAllNotes } = useContext(NotesContext);
     const {searchText} = useContext(SearchContext);
     const [selectedNote, setSelectedNote] = useState({});
+    const { theme } = useContext(ThemeContext);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -28,7 +30,7 @@ const Notes = () => {
     }, []);
 
     return (
-        <section className={styles.container}>
+        <section className={styles.container} style={{backgroundColor: theme === "light" ? "var(--white)" : "var(--gray-dark)"}}>
             {
                 selectedNote.color &&
                 <Popup {...selectedNote} onClose={() => setSelectedNote({})} />
