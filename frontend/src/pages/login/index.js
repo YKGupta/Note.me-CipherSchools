@@ -10,7 +10,7 @@ import ThemeContext from '../../context/theme/context';
 
 const Login = () => {
 
-    const { loading, percentage } = useContext(LoaderContext);
+    const { loading, percentage, loadingText } = useContext(LoaderContext);
     const {getUserDetails} = useContext(UserContext);
     const {theme} = useContext(ThemeContext);
     const navigate = useNavigate();
@@ -31,7 +31,7 @@ const Login = () => {
         <>
             { 
                 loading ?
-                <Loader percentage={percentage} />
+                <Loader percentage={percentage} text={loadingText} />
             :
                 <main className={styles.container} style={{backgroundColor: theme === "light" ? "var(--white)" : "var(--black)"}}>
                     <Left />

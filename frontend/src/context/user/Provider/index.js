@@ -13,7 +13,7 @@ const UserProvider = (props) => {
     const [ password, setPassword ] = useState("");
     const [ user, setUser ] = useState({});
     const navigate = useNavigate();
-    const { setLoading, setPercentage } = useContext(LoaderContext);
+    const { setLoading, setPercentage, setLoadingText } = useContext(LoaderContext);
 
     const login = async () => {
         try
@@ -23,6 +23,7 @@ const UserProvider = (props) => {
 
             setLoading(true);
             setPercentage(10);
+            setLoadingText("Waiting for server response...");
             await wait(50);
 
             const response = await fetch(`${process.env.REACT_APP_API_HOST}/login`, {
@@ -37,11 +38,13 @@ const UserProvider = (props) => {
 			});
 
             setPercentage(60);
+            setLoadingText("Validating data...");
             await wait(50);
             
             const json = await response.json();
             
             setPercentage(90);
+            setLoadingText("Just a moment...");
             await wait(50);
             
             setName("");
@@ -77,6 +80,7 @@ const UserProvider = (props) => {
 
             setLoading(true);
             setPercentage(10);
+            setLoadingText("Waiting for server response...");
             await wait(50);
 
             const response = await fetch(`${process.env.REACT_APP_API_HOST}/signup`, {
@@ -92,11 +96,13 @@ const UserProvider = (props) => {
 			});
 
             setPercentage(60);
+            setLoadingText("Validating data...");
             await wait(50);
 
             const json = await response.json();
 
             setPercentage(90);
+            setLoadingText("Just a moment...");
             await wait(50);
             
             setName("");

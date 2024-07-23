@@ -1,15 +1,26 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import NotesContext from '../Context';
 import { toast } from 'react-toastify';
 import { getFromLocalStorage } from '../../../utils/localstorage';
+import LoaderContext from '../../loader/context';
+import wait from '../../../utils/wait';
 
 const NotesProvider = (props) => {
 
     const [notes, setNotes] = useState([]);
+    const { setLoading, setPercentage, setLoadingText } = useContext(LoaderContext);
 
     const getAllNotes = async () => {
         try
         {
+            setLoading(true);
+            setPercentage(0);
+            setLoadingText("Initiating requests...");
+            await wait(50);
+            setPercentage(10);
+            setLoadingText("Waiting for server response...");
+            await wait(50);
+
             const response = await fetch(`${process.env.REACT_APP_API_HOST}/note/read`, {
 				method: "GET",
 				headers: {
@@ -17,7 +28,15 @@ const NotesProvider = (props) => {
 				}
 			});
 
+            setLoadingText("Interpreting reponse...");
+            setPercentage(60);
+            await wait(50);
+            
             const json = await response.json();
+
+            setLoadingText("Just a moment...");
+            setPercentage(100);
+            await wait(50);
 
             if(json.success)
             {
@@ -27,6 +46,8 @@ const NotesProvider = (props) => {
             {
                 toast.error(json.message);
             }
+
+            setLoading(false);
         }
         catch(error)
         {
@@ -37,6 +58,14 @@ const NotesProvider = (props) => {
     const addNote = async (text, color) => {
         try
         {
+            setLoading(true);
+            setPercentage(0);
+            setLoadingText("Initiating requests...");
+            await wait(50);
+            setPercentage(10);
+            setLoadingText("Waiting for server response...");
+            await wait(50);
+
             const response = await fetch(`${process.env.REACT_APP_API_HOST}/note/create`, {
                 method: "POST",
                 headers: {
@@ -46,7 +75,15 @@ const NotesProvider = (props) => {
                 body: JSON.stringify({ text, color })
             });
 
+            setLoadingText("Interpreting reponse...");
+            setPercentage(60);
+            await wait(50);
+
             const json = await response.json();
+
+            setLoadingText("Just a moment...");
+            setPercentage(100);
+            await wait(50);
 
             if(json.success)
             {
@@ -59,6 +96,8 @@ const NotesProvider = (props) => {
             {
                 toast.error(json.message);
             }
+            
+            setLoading(false);
         }
         catch(error)
         {
@@ -69,6 +108,14 @@ const NotesProvider = (props) => {
     const updateNote = async (id, text) => {
         try
         {
+            setLoading(true);
+            setPercentage(0);
+            setLoadingText("Initiating requests...");
+            await wait(50);
+            setPercentage(10);
+            setLoadingText("Waiting for server response...");
+            await wait(50);
+
             const response = await fetch(`${process.env.REACT_APP_API_HOST}/note/update/${id}`, {
                 method: "PUT",
                 headers: {
@@ -78,7 +125,15 @@ const NotesProvider = (props) => {
                 body: JSON.stringify({ text })
             });
 
+            setLoadingText("Interpreting reponse...");
+            setPercentage(60);
+            await wait(50);
+
             const json = await response.json();
+
+            setLoadingText("Just a moment...");
+            setPercentage(100);
+            await wait(50);
 
             if(json.success)
             {
@@ -97,6 +152,8 @@ const NotesProvider = (props) => {
             {
                 toast.error(json.message);
             }
+            
+            setLoading(false);
         }
         catch(error)
         {
@@ -107,6 +164,14 @@ const NotesProvider = (props) => {
     const deleteNote = async (id, text) => {
         try
         {
+            setLoading(true);
+            setPercentage(0);
+            setLoadingText("Initiating requests...");
+            await wait(50);
+            setPercentage(10);
+            setLoadingText("Waiting for server response...");
+            await wait(50);
+
             const response = await fetch(`${process.env.REACT_APP_API_HOST}/note/delete/${id}`, {
                 method: "DELETE",
                 headers: {
@@ -115,7 +180,15 @@ const NotesProvider = (props) => {
                 }
             });
 
+            setLoadingText("Interpreting reponse...");
+            setPercentage(60);
+            await wait(50);
+
             const json = await response.json();
+
+            setLoadingText("Just a moment...");
+            setPercentage(100);
+            await wait(50);
 
             if(json.success)
             {
@@ -136,6 +209,8 @@ const NotesProvider = (props) => {
             {
                 toast.error(json.message);
             }
+            
+            setLoading(false);
         }
         catch(error)
         {

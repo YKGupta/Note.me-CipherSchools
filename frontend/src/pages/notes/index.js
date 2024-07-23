@@ -9,6 +9,8 @@ import Popup from '../../components/cards/popup';
 import NotesContext from '../../context/notes/Context';
 import SearchContext from '../../context/search/context';
 import ThemeContext from '../../context/theme/context';
+import LoaderContext from '../../context/loader/context';
+import Loader from '../../components/shared/loader';
 
 const Notes = () => {
 
@@ -16,6 +18,7 @@ const Notes = () => {
     const {searchText} = useContext(SearchContext);
     const [selectedNote, setSelectedNote] = useState({});
     const { theme } = useContext(ThemeContext);
+    const { loading, percentage, loadingText } = useContext(LoaderContext);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -30,18 +33,25 @@ const Notes = () => {
     }, []);
 
     return (
-        <section className={styles.container} style={{backgroundColor: theme === "light" ? "var(--white)" : "var(--gray-dark)"}}>
+        <>
             {
-                selectedNote.color &&
-                <Popup {...selectedNote} onClose={() => setSelectedNote({})} />
+                loading ? 
+                    <Loader percentage={percentage} text={loadingText} />
+                :
+                    <section className={styles.container} style={{backgroundColor: theme === "light" ? "var(--white)" : "var(--gray-dark)"}}>
+                        {
+                            selectedNote.color &&
+                            <Popup {...selectedNote} onClose={() => setSelectedNote({})} />
+                        }
+                        <Greeting />
+                        <main className={styles.main}>
+                            {
+                                notes.filter((note) => note.text.toLowerCase().includes(searchText.toLowerCase())).map((item, index) => <Note key={item._id} onSelect={() => setSelectedNote({ text: item.text, date: item.createdAt, color: item.color, id: item._id })} text={item.text} date={item.createdAt} color={item.color} />)
+                            }
+                        </main>
+                    </section>
             }
-            <Greeting />
-            <main className={styles.main}>
-                {
-                    notes.filter((note) => note.text.toLowerCase().includes(searchText.toLowerCase())).map((item, index) => <Note key={item._id} onSelect={() => setSelectedNote({ text: item.text, date: item.createdAt, color: item.color, id: item._id })} text={item.text} date={item.createdAt} color={item.color} />)
-                }
-            </main>
-        </section>
+        </>
     )
 }
 

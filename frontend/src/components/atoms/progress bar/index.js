@@ -8,7 +8,7 @@ const ProgressBar = (props) => {
     const { theme } = useContext(ThemeContext);
 
     return (
-        <div className={styles.container} style={{backgroundColor: theme === "light" ? "var(--rose-light)" : "var(--black-light)"}}>
+        <div className={styles.container} style={{backgroundColor: theme === "light" ? "var(--rose-light)" : "var(--black)"}}>
             <span style={{ width: percentage, backgroundColor: theme === "dark" ? "var(--rose)" : "var(--black)" }}></span>
         </div>
     )
