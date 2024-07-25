@@ -10,3 +10,9 @@
         transition: width 0.05s;
     }
 }
+
+@media screen and (max-width: 600px) {
+    .container{
+        display: none;
+    }
+}

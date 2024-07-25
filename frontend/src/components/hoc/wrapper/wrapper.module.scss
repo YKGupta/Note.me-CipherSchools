@@ -5,3 +5,9 @@
         padding: 8px 12rem;    
     }
 }
+
+@media screen and (max-width: 600px) {
+    .wrapper{
+        padding: 10px 1rem;
+    }
+}

@@ -74,3 +74,11 @@
         transform: translateX(0px);
     }
 }
+
+@media screen and (max-width: 600px) {
+    .container{
+        width: 80%;
+        top: calc(50% - ((20% / 6) * 5));
+        left: 10%;
+    }
+}

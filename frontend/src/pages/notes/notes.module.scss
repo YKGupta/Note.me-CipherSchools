@@ -12,3 +12,18 @@
         grid-template-columns: repeat(4, 1fr);
     }
 }
+
+@media screen and (max-width: 600px) {
+    .container{
+        margin-left: 0px;
+        margin-bottom: 80px;
+        margin: auto;
+
+        .main{
+            display: grid;
+            margin-bottom: 80px;
+            gap: 30px;
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+}
