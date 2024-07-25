@@ -1,12 +1,13 @@
 ## Note.me: A Secure MERN Note-Taking App
 [![Netlify Status](https://api.netlify.com/api/v1/badges/b721716b-fa30-4ebd-9355-71cb9f25fc4c/deploy-status)](https://app.netlify.com/sites/chuha-note/deploys)
+![1 - MERGE](https://github.com/user-attachments/assets/fee818da-966c-458d-9c03-1444f00b437e)
 
 ### Features
 
 * **User Authentication:** Secure signup and login using email.
 * **Note Management:** Create, Read, Update, and Delete notes.
 * **Search Functionality:** Search notes by content for easy retrieval.
-* **Light/Dark Theme:** Switch between light and dark themes for better viewing experience.
+* **Light/Dark Theme:** Switch between light and dark themes for a better viewing experience.
 * **PDF Export:** Download all your notes as a single PDF for offline access or sharing.
 * **Mobile Responsiveness:** Adapts seamlessly to different screen sizes.
 
