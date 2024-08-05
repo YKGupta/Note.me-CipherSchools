@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import UserContext from '../Context';
-import { addToLocalStorage, getFromLocalStorage } from '../../../utils/localstorage';
+import { addToLocalStorage, getFromLocalStorage, removeFromLocalStorage } from '../../../utils/localstorage';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import LoaderContext from '../../loader/context';
@@ -37,6 +37,12 @@ const UserProvider = (props) => {
                 })
 			});
 
+            
+            if(response.status === 500)
+            {
+                throw new Error("Unable to log you in");
+            }
+
             setPercentage(60);
             setLoadingText("Validating data...");
             await wait(50);
@@ -63,12 +69,14 @@ const UserProvider = (props) => {
             {
                 toast.error(json.message);
             }
-
-            setLoading(false);
         }
         catch(error)
         {
-            console.log(error);
+            toast.error(error.message);
+        }
+        finally
+        {
+            setLoading(false);
         }
     };
 
@@ -99,6 +107,11 @@ const UserProvider = (props) => {
             setLoadingText("Validating data...");
             await wait(50);
 
+            if(response.status === 500)
+            {
+                throw new Error("Unable to sign you up");
+            }
+
             const json = await response.json();
 
             setPercentage(90);
@@ -121,18 +134,25 @@ const UserProvider = (props) => {
             {
                 toast.error(json.message);
             }
-
-            setLoading(false);
         }
         catch(error)
         {
-            toast.error(error);
+            toast.error(error.message);
+        }
+        finally
+        {
+            setLoading(false);
         }
     };
 
     const getUserDetails = async () => {
         try
         {
+            setLoading(true);
+            setPercentage(10);
+            setLoadingText("Trying to log in...");
+            await wait(50);
+            
             const response = await fetch(`${process.env.REACT_APP_API_HOST}/details`, {
                 method: "GET",
                 headers: {
@@ -140,7 +160,20 @@ const UserProvider = (props) => {
                 }
             });
             
+            setPercentage(70);
+            setLoadingText("Validating response...");
+            await wait(50);
+            
             const json = await response.json();
+
+            if(response.status === 500)
+            {
+                throw new Error("Unable to fetch details");
+            }
+
+            setPercentage(90);
+            setLoadingText("Just a moment...");
+            await wait(50);
             
             if(json.success)
             {
@@ -155,13 +188,23 @@ const UserProvider = (props) => {
         }
         catch(error)
         {
-            toast.error(error);
+            toast.error(error.message);
             return false;
+        }
+        finally
+        {
+            setLoading(false);
         }
     };
 
+    const logout = () => {
+        removeFromLocalStorage("token");
+        setUser({});
+        navigate('/');
+    };
+
     return (
-        <UserContext.Provider value={{ setName, setEmail, setPassword, login, signup, user, getUserDetails, email, password, name }}>
+        <UserContext.Provider value={{ setName, setEmail, setPassword, login, signup, user, getUserDetails, logout, email, password, name }}>
             { props.children }
         </UserContext.Provider>
     )

@@ -6,11 +6,12 @@ import sideData from '../../../data/sidebar.json';
 import { useNavigate } from 'react-router-dom';
 import generateRandomColor from '../../../utils/genRandomColor';
 import NotesContext from '../../../context/notes/Context';
-import { removeFromLocalStorage } from '../../../utils/localstorage';
+import UserContext from '../../../context/user/Context';
 
 const Sidebar = () => {
 
     const { addNote } = useContext(NotesContext);
+    const { logout } = useContext(UserContext);
     const navigate = useNavigate();
 
     const handleClick = (src) => {
@@ -18,11 +19,6 @@ const Sidebar = () => {
         {
             addNote("Type your note...", generateRandomColor(0.4));
         }
-    };
-
-    const handleLogout = () => {
-        removeFromLocalStorage("token");
-        navigate('/');
     };
 
     return (
@@ -37,7 +33,7 @@ const Sidebar = () => {
                     )
                 }
             </section>
-            <article className={styles.logout} onClick={handleLogout}>
+            <article className={styles.logout} onClick={logout}>
                 <Icon icon="material-symbols:logout" />
             </article>
         </aside>

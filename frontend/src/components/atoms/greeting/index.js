@@ -12,7 +12,8 @@ const Greeting = () => {
     useEffect(() => {
         if(!getFromLocalStorage("token"))
             return;
-        getUserDetails();
+        if(!user.name)
+            getUserDetails();
         // eslint-disable-next-line
     }, []);
 
