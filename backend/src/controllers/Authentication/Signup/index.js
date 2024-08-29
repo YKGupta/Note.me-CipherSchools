@@ -1,21 +1,11 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../../../models/User');
-const { validate } = require('deep-email-validator');
 
 const signupHandler = async (req, res) => {
     try
     {
         const { name, email, password } = req.body;
-        const { valid } = await validate(email);
-
-        if(!valid)
-        {
-            return res.status(400).json({
-                success: false,
-                message: "Invalid email"
-            });
-        }
 
         const oldUser = await User.findOne({ email });
         if(oldUser)
